@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: cloud-gw
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: produc-service
+          uri: lb://product
+          predicates:
+            - Path=/products/**
+            - Header=X-Request-Id, \d+
+          filters:
+            - AddResponseHeader=X-Product-Header, product-response-header
+server:
+  port: 8080
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka

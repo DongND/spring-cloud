@@ -1,0 +1,4 @@
+message: Hello world from Config server
+spring:
+  profiles:
+    active: dev

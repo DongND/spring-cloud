@@ -1,0 +1,15 @@
+server:
+  port: 9090
+spring:
+  application:
+    name: busclient
+  cloud:
+    config:
+      # before boot 2.4
+#      uri:  http://localhost:8888
+      label: master
+  config:
+    # from spring boot 2.4
+    import: "optional:configserver:http://localhost:9999"
+  profiles:
+    active: dev

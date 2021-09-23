@@ -1,0 +1,35 @@
+spring:
+  cloud:
+    bus:
+      enabled: true
+      id: sample-bus-id
+      env:
+        enabled: true
+      refresh:
+        enabled: true
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:9092
+          zkNodes: localhost:2181
+    config:
+      server:
+        native:
+          search-locations:
+            - file:/D:/practice/spring-cloud-training/config-repo
+  #     git:
+  #       uri: file:///D:\practice\spring-cloud-training\config-repo
+  #       default-label: master
+  profiles:
+    active: dev,native
+  application:
+    name: configserver
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - bus-refresh
+          - bus-env
+server:
+  port: 9999
